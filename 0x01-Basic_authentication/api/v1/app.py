@@ -14,7 +14,7 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 auth = None
-auth = getenv('AUTH_TYPE', 'auth')
+auth = os.getenv('AUTH_TYPE')
 if auth:
     # print(f"auth:{auth}")
     from api.v1.auth.auth import Auth
@@ -48,6 +48,10 @@ def forbidden(error) -> str:
 
 @app.before_request
 def before() -> str:
+    """
+    Checks the request header
+    for authorization
+    """
     excluded_path = ['/api/v1/status/',
                      '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if not auth.require_auth(request.path, excluded_path):
