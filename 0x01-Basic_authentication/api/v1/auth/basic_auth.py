@@ -13,6 +13,9 @@ class BasicAuth(Auth):
 
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
+        """
+        Extracts the string after "Basic "
+        """
         if authorization_header and type(authorization_header) == str:
             if authorization_header[:6] == 'Basic ':
                 return authorization_header[7:]
