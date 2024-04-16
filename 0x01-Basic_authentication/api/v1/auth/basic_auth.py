@@ -46,7 +46,7 @@ class BasicAuth(Auth):
         """
         if db64_auth_header and type(db64_auth_header) == str:
             if ":" in db64_auth_header:
-                email, paswrd = db64_auth_header.split(':')
+                email, paswrd = db64_auth_header.split(':', maxsplit=1)
                 return (email, paswrd)
         return (None, None)
 
