@@ -57,12 +57,29 @@ class BasicAuth(Auth):
         """
         if user_email and user_pwd:
             if type(user_email) == str and type(user_pwd) == str:
+                user = None
                 try:
                     user = User.search({'email': user_email})
                 except Exception:
-                    return None
+                    return
                 else:
                     for obj in user:
                         if obj.is_valid_password(user_pwd):
                             return obj
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """
+        Returns the current user from the
+        request header
+        """
+        auth_header = self.authorization_header(request)
+        #print(f"auth_header: {auth_header}")
+        b64_auth_header=self.extract_base64_authorization_header(auth_header)
+        #print(f"b64_auth_header:{b64_auth_header}")
+        db64_auth_header = self.decode_base64_authorization_header(b64_auth_header)
+        #print(f'db64_auth_header:{db64_auth_header}')
+        email, pwd = self.extract_user_credentials(db64_auth_header)
+        #print(f"email: {email}, pwd: {pwd}")
+        #print(self.user_object_from_credentials(email, pwd))
+        return self.user_object_from_credentials(email, pwd)
