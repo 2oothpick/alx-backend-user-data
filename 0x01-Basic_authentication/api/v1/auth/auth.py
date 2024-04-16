@@ -17,6 +17,11 @@ class Auth:
         require_auth function
         """
         if path and excluded_paths:
+            for excluded_path in excluded_paths:
+                if excluded_path[-1] is "*":
+                    excluded_path, discard = excluded_path.split('*')
+                    if excluded_path in path:
+                        return False
             if path[-1] is not '/':
                 path += '/'
             if path in excluded_paths:
