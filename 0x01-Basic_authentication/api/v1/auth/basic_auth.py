@@ -38,6 +38,10 @@ class BasicAuth(Auth):
         return None
 
     def extract_user_credentials(self, db64_auth_header: str) -> (str, str):
+        """
+        Extracts user credentials from provided
+        decoded_base64_authorization_header
+        """
         if db64_auth_header and type(db64_auth_header) == str:
             if ":" in db64_auth_header:
                 email, paswrd = db64_auth_header.split(':')
