@@ -20,11 +20,11 @@ class Auth:
         """
         if path and excluded_paths:
             for excluded_path in excluded_paths:
-                if excluded_path[-1] is "*":
+                if excluded_path[-1] == "*":
                     excluded_path, discard = excluded_path.split('*')
                     if excluded_path in path:
                         return False
-            if path[-1] is not '/':
+            if path[-1] != '/':
                 path += '/'
             if path in excluded_paths:
                 return False
