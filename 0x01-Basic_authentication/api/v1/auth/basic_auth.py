@@ -74,13 +74,8 @@ class BasicAuth(Auth):
         request header
         """
         auth_header = self.authorization_header(request)
-        # print(f"auth_header: {auth_header}")
         b64_auth_header = self.extract_base64_authorization_header(auth_header)
-        # print(f"b64_auth_header:{b64_auth_header}")
         db64_auth_header = self.decode_base64_authorization_header(
             b64_auth_header)
-        # print(f'db64_auth_header:{db64_auth_header}')
         email, pwd = self.extract_user_credentials(db64_auth_header)
-        # print(f"email: {email}, pwd: {pwd}")
-        # print(self.user_object_from_credentials(email, pwd))
         return self.user_object_from_credentials(email, pwd)

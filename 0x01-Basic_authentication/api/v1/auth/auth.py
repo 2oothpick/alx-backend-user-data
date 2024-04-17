@@ -14,7 +14,9 @@ class Auth:
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
-        require_auth function
+        Returns False if path is in the list
+        of excluded paths. ie: path does not
+        require authentication
         """
         if path and excluded_paths:
             for excluded_path in excluded_paths:
@@ -30,7 +32,9 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """
-        authorization_header function
+        Returns Authorization header if present
+        in request
+        Otherwise, returns None
         """
         if request is None:
             return None

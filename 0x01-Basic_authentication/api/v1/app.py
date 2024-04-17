@@ -20,7 +20,6 @@ auth = getenv('AUTH_TYPE')
 if auth == 'basic_auth':
     auth = BasicAuth()
 elif auth == 'auth':
-    # print(f"auth:{auth}")
     auth = Auth()
 
 
@@ -59,13 +58,8 @@ def before() -> str:
                      '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if not auth.require_auth(request.path, excluded_path):
         return
-    # print(auth.authorization_header(request))
     if auth.authorization_header(request) is None:
-        # print('hello')
         abort(401)
-    # print(auth)
-    #print(request)
-    #print(auth.current_user(request))
     if auth.current_user(request) is None:
         abort(403)
 
