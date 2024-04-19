@@ -50,7 +50,7 @@ class Auth:
         current_user function
         """
         return None
-    
+
     def session_cookie(self, request=None):
         """
         session_cookie
