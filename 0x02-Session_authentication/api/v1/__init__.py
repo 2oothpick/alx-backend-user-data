@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" DocDocDocDocDocDoc
+"""
+Session Authentication Views
 """
 from flask import Blueprint
 
