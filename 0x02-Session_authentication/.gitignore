@@ -1,0 +1,9 @@
+main.py
+__pycache__/
+v1/__pycache__/
+v1/auth/__pycache__/
+*__pycache__
+*.pyc
+0x01-Basic_authentication/api/v1/auth/__pycache__/*.pyc
+*.json
+.env/
