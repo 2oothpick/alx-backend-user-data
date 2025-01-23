@@ -2,7 +2,7 @@
 """
 Password encryption module
 """
-from bcrypt import hashpw, gensalt, checkpw
+import bcrypt
 
 
 def hash_password(password: str) -> bytes:
@@ -10,6 +10,6 @@ def hash_password(password: str) -> bytes:
     Returns a salted hashed password
     using bcrypt
     """
-    salt = gensalt()
-    hash = hashpw(password.encode('utf-8'), salt)
-    return salt
+    salt = bcrypt.gensalt()
+    hash = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hash
